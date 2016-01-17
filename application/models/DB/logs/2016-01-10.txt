@@ -1,0 +1,27 @@
+Time : 21:26:29
+SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'lesson_name' cannot be null
+Raw SQL : INSERT INTO history (lesson_id,user_id,time_stamp) VALUES (:lid, :uid, CURRENT_TIMESTAMP) ON DUPLICATE KEY UPDATE `time_stamp` = CURRENT_TIMESTAMP
+
+Time : 21:21:49
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
+
+Time : 21:21:43
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
+
+Time : 21:21:43
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
+
+Time : 21:21:42
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
+
+Time : 21:21:41
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
+
+Time : 21:21:38
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
+
+Time : 19:34:59
+SQLSTATE[HY000] [1049] Unknown database 'vb'
+
+Time : 19:34:39
+SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)

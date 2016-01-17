@@ -1,0 +1,91 @@
+Time : 07:56:19
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 07:50:07
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:49:42
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 07:49:28
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:48:56
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:48:00
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:47:03
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 07:35:00
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:34:41
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 07:33:59
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:33:38
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 07:27:17
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:27:05
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:26:30
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:25:48
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:15:35
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:seedelles,:returns)
+
+Time : 07:15:25
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 07:14:19
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 06:55:34
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return) VALUES(?,?,?,?)' at line 1
+Raw SQL : INSERT INTO Transaction (ref_id,product_id,selles,return) VALUES(:ref_id,:pro_id,:selles,:return)
+
+Time : 06:49:33
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return) VALUES(?,?,?,?,?)' at line 1
+Raw SQL : INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,return) VALUES(:Timestampd,:ref_id,:pro_id,:selles,:return)
+
+Time : 06:48:12
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return) VALUES(?,?,?,?,?)' at line 1
+Raw SQL : INSERT INTO Transaction (TimeStamp,ref_id,product_id,selles,return) VALUES(:Timestampd,:ref_id,:pro_id,:selles,:return)
+
+Time : 06:46:59
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return) VALUES ( CURRENT_TIMESTAMP, '12', '2', '12', '12')' at line 1
+Raw SQL : INSERT INTO Transaction (TimeStamp, ref_id, product_id, selles, return) VALUES ( CURRENT_TIMESTAMP, '12', '2', '12', '12')
+
+Time : 06:41:51
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return) VALUES(?,?,?,?,?)' at line 1
+Raw SQL : INSERT INTO Transaction (TimeStamp,ref_id,product_id,selles,return) VALUES(:Timestampd,:ref_id,:pro_id,:selles,:return)
