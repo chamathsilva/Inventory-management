@@ -20,8 +20,12 @@ $result = 0;
 
 
 $db->beginTransaction();
-
+$total_salary = 0;
 foreach ($productIdlist as $productid){
+
+
+
+    $productInfo  = getProductInfo();
 
     $saleskey = 'sales'.$productid;
     $returnkey = 'return'.$productid;
@@ -41,7 +45,7 @@ foreach ($productIdlist as $productid){
             // Reduce current stock count
             $result = $db->query("UPDATE  Product SET currentStock = currentStock - :OutStock WHERE Product_id = :product_id" ,array("OutStock" => $sales, "product_id" =>$productid));
             //Make commision increment for ref
-
+            $total_salary = $total_salary + (floatval($sales) * floatval($productInfo[$productid]['Commision']));
 
         }
         if($return != 0){
@@ -50,13 +54,19 @@ foreach ($productIdlist as $productid){
             // Increase current stock count
             $result = $db->query("UPDATE  Product SET currentStock = currentStock + :InStock WHERE Product_id = :product_id" ,array("InStock" => $return, "product_id" =>$productid));
             //make commision decrement for ref
-
+            $total_salary = $total_salary - (floatval($return) * floatval($productInfo[$productid]['Commision']));
 
         }
 
     }
 
 }
+
+
+
+//insert Day commision to ref salary table
+$result = $db->query("INSERT INTO refSalary (ref_id,salary) VALUES (:ref_id,:salary)",array("ref_id" => $Ref_id, "salary" =>$total_salary));
+
 $db->commit();
 
 
@@ -68,7 +78,7 @@ if ($result == 1){
         'type'=>'text',
         'text' => '<div class="alert alert-success">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Success!</strong> Indicates a successful or positive action.
+                        <strong>Success!</strong> Indicates a '.$total_salary.'successful or positive action.
                         </div>'
     ));
 

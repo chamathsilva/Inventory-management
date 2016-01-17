@@ -136,9 +136,12 @@
         $productlist = $db->query("SELECT * FROM Product");
         $data_array = array();
         foreach ($productlist as $product ){
-            $data_array[$product["Product_id"]][] = $product["Commision"];
+            $data_array[$product["Product_id"]]['Commision'] = $product["Commision"];
+            $data_array[$product["Product_id"]]['Selling_price'] = $product["Selling_price"];
+            $data_array[$product["Product_id"]]['Cost'] = $product["Cost"];
         }
-        return $data_array['5'];
+        //return floatval($data_array['6']['Commision']);
+        return $data_array;
 
     }
 
@@ -172,4 +175,4 @@
 
     //d(getRefList(),"getRefList");
     //d(getProductId(),"getProductId");
-    d(getProductInfo(),"getProductInfo");
+   // d(getProductInfo(),"getProductInfo");

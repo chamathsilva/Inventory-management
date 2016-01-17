@@ -1,3 +1,11 @@
+Time : 08:58:03
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 08:41:51
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
 Time : 07:56:19
 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
 Raw SQL : SELECT * FROM lesson
