@@ -1,3 +1,95 @@
+Time : 19:00:59
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:59:05
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:58:11
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:57:17
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:54:08
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:53:56
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:49:56
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:49:31
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:47:31
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:43:20
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:40:35
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 18:40:34
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.feedback' doesn't exist
+Raw SQL : SELECT * FROM feedback
+
+Time : 18:07:27
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
+Raw SQL : SELECT COUNT(*) FROM users where type = 2
+
+Time : 15:55:11
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 15:55:02
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 15:55:01
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.feedback' doesn't exist
+Raw SQL : SELECT * FROM feedback
+
+Time : 15:52:29
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 15:48:33
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 15:01:59
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
+Raw SQL : SELECT COUNT(*) FROM users where type = 2
+
+Time : 14:55:50
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.feedback' doesn't exist
+Raw SQL : SELECT * FROM feedback LIMIT 4
+
+Time : 14:55:44
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.feedback' doesn't exist
+Raw SQL : SELECT * FROM feedback
+
+Time : 14:55:41
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
+Time : 14:55:09
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
+Raw SQL : SELECT * FROM lesson
+
 Time : 14:48:50
 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.lesson' doesn't exist
 Raw SQL : SELECT * FROM lesson

@@ -51,7 +51,7 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                 </div>
             </div>
 
-        </form>
+
 
         <div class="row">
             <div class="col-lg-8">
@@ -64,6 +64,8 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                 </div>
             </div>
         </div>
+
+        </form>
 
     </div>
 </div><!--do not remove -->

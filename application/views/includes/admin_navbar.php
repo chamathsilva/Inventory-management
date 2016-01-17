@@ -91,6 +91,12 @@
                 <a onclick="loadmaddmissing()"><i class="fa fa-fw fa-edit"></i>Add missings</a>
             </li>
 
+
+            <li>
+                <a onclick="loadgetSalary()"><i class="fa fa-fw fa-edit"></i>Get Salary</a>
+            </li>
+
+
             <li>
                 <a onclick="loadmasseges()"><i class="fa fa-fw fa-edit"></i>Messages</a>
             </li>

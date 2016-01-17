@@ -88,8 +88,6 @@
                     if (response.type == "text"){
                         $("#results").html(response.text);
                         document.getElementById("userUploadForm").reset();
-                        viewData();
-
                     }else{
                         $("#results").html(response.text);
 
