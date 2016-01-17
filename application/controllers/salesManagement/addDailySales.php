@@ -40,6 +40,8 @@ foreach ($productIdlist as $productid){
             $result = $db->query("INSERT INTO Stock (SalesOut,product_id) VALUES (:OutStock,:product_id)",array("OutStock" => $sales, "product_id" =>$productid));
             // Reduce current stock count
             $result = $db->query("UPDATE  Product SET currentStock = currentStock - :OutStock WHERE Product_id = :product_id" ,array("OutStock" => $sales, "product_id" =>$productid));
+            //Make commision increment for ref
+
 
         }
         if($return != 0){
@@ -47,6 +49,8 @@ foreach ($productIdlist as $productid){
             $result = $db->query("INSERT INTO Stock (Return_in,product_id) VALUES (:InStock,:product_id)",array("InStock" => $return, "product_id" =>$productid));
             // Increase current stock count
             $result = $db->query("UPDATE  Product SET currentStock = currentStock + :InStock WHERE Product_id = :product_id" ,array("InStock" => $return, "product_id" =>$productid));
+            //make commision decrement for ref
+
 
         }
 

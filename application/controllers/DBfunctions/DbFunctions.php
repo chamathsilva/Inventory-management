@@ -131,6 +131,17 @@
         return $data_array;
     }
 
+    function getProductInfo(){
+        global $db;
+        $productlist = $db->query("SELECT * FROM Product");
+        $data_array = array();
+        foreach ($productlist as $product ){
+            $data_array[$product["Product_id"]][] = $product["Commision"];
+        }
+        return $data_array['5'];
+
+    }
+
 
 
 
@@ -161,3 +172,4 @@
 
     //d(getRefList(),"getRefList");
     //d(getProductId(),"getProductId");
+    d(getProductInfo(),"getProductInfo");
