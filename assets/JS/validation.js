@@ -43,6 +43,11 @@ $(function(){
         return this.optional(element) || /^-?\d+$/.test(value);
     }, "A Valid number please");
 
+    $.validator.addMethod("positiveNumber", function (value, element) {
+        return this.optional(element) || /^\+?[0-9]*\.?[0-9]+$/.test(value);
+        }, "Enter a positive number.");
+
+
 
 
 

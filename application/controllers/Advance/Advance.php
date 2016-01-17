@@ -19,4 +19,4 @@ $amount   = filter_var($_POST["Amount"], FILTER_SANITIZE_STRING);
 $result = $db->query("INSERT INTO Advances (ref_id,Amount,Timestamp) VALUES(:ref_id,:Amount,:Timestampd)",array("ref_id"=>$Ref_id,"Amount"=>$amount,"Timestampd"=>$date));
 
 
-Die("refid :".$Ref_id."  ".$date.$amount.$result);
+Die("refid :".$Ref_id.$date.$amount.$result);

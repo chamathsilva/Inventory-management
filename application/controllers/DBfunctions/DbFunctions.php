@@ -121,6 +121,13 @@
         return $reflist;
     }
 
+
+    function getProductList(){
+        global $db;
+        $productlist = $db->query("SELECT * FROM Product");
+        return $productlist;
+    }
+
     function getProductId(){
         global $db;
         $productlist = $db->query("SELECT Product_id FROM Product");
