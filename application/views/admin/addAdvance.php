@@ -167,7 +167,8 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 <script type="text/javascript">
     $(function() {
         $('#datetimepicker1').datetimepicker({
-            language: 'us'
+            language: 'us',
+            pickTime: false
         });
     });
 

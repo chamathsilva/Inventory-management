@@ -11,8 +11,8 @@ $other    = filter_var($_POST["other"], FILTER_SANITIZE_STRING);
 
 //echo $refname.$basicsalary.$other;
 
-
+$db->beginTransaction();
 $result = $db->query("INSERT INTO Ref (Ref_Name,Basic_salary,Other) VALUES(:namee,:Bsalary,:other)",array("namee"=>$refname,"Bsalary"=>$basicsalary,"other"=>$other));
-
+$db->commit();
 
 echo json_encode($result);

@@ -4,12 +4,12 @@
 
 <div class="col-lg-12">
     <h1 class="page-header" style="margin:50px 0px 20px">
-        Manage <small>Lessons</small>
+        Manage <small>stock</small>
     </h1>
 
     <ol class="breadcrumb">
         <li class="active">
-            <i class="fa fa-dashboard"></i> Manage lessons
+            <i class="fa fa-dashboard"></i> Manage stock
         </li>
     </ol>
 

@@ -57,21 +57,17 @@
             </li>
 
             <li>
+                <a onclick=" loadaddRemoveStock()"><i class="fa fa-fw fa-bar-chart-o"></i>Manage stock</a>
+            </li>
+
+
+            <li>
+                <a onclick="loadmadddailysales()"><i class="fa fa-fw fa-edit"></i>Dialy sales</a>
+            </li>
+
+
+            <li>
                 <a onclick="loadaddproduct()"><i class="fa fa-fw fa-edit"></i>Add products</a>
-            </li>
-
-
-            <li>
-                <a onclick="loadaddref()"><i class="fa fa-fw fa-edit"></i>Add ref</a>
-            </li>
-
-
-            <li>
-                <a onclick=" loadaddRemoveStock()"><i class="fa fa-fw fa-bar-chart-o"></i>Add/Remove item stock</a>
-            </li>
-
-            <li>
-                <a onclick="loadRegisterUsers()"><i class="fa fa-fw fa-edit"></i>Add Users</a>
             </li>
 
             <li>
@@ -80,20 +76,17 @@
 
 
             <li>
-                <a onclick="loadmadddailysales()"><i class="fa fa-fw fa-edit"></i>Dialy sales</a>
-            </li>
-
-            <li>
-                <a onclick="loadmanageLessons()"><i class="fa fa-fw fa-edit"></i>Manage lessons</a>
-            </li>
-
-            <li>
                 <a onclick="loadmaddmissing()"><i class="fa fa-fw fa-edit"></i>Add missings</a>
             </li>
 
 
             <li>
                 <a onclick="loadgetSalary()"><i class="fa fa-fw fa-edit"></i>Get Salary</a>
+            </li>
+
+
+            <li>
+                <a onclick="loadaddref()"><i class="fa fa-fw fa-edit"></i>Add ref</a>
             </li>
 
 

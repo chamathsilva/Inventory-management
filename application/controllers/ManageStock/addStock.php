@@ -21,11 +21,13 @@ if (!is_numeric($amount ) ||  $amount < 0){
 }
 
 
-
+$db->beginTransaction();
 $result = $db->query("INSERT INTO Stock (InStock,product_id) VALUES (:InStock,:product_id)",array("InStock" => $amount, "product_id" =>$product_id));
 if ($result == 1){
     $result = $db->query("UPDATE  Product SET currentStock = currentStock + :InStock WHERE Product_id = :product_id" ,array("InStock" => $amount, "product_id" =>$product_id));
 }
+
+$db->commit();
 
 if ($result == 1){
     $output = json_encode(array( //create JSON data
