@@ -145,7 +145,7 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
     var adminLoaddiv = $("#adminLoderdiv");
 
-    //loadDashboard();
+    loadDashboard();
 
     function loadfeedback(){
         var feedback = $("#feedback_dropdown");

@@ -3,51 +3,19 @@ require("../../models/DB/Db.class.php");
 $db = new Db();
 
 
-function totalView($lessonid,$dbnew){
-    $stat = $dbnew->query("SELECT SUM(view_count) AS VIEWS FROM viewcount WHERE lesson_id = :id",array("id"=>$lessonid));
-    $stat =  $stat[0]["VIEWS"];
-    if ($stat == false){
-        return 0;
-    }
-    return $stat;
-}
-
-
-function countView($lessonid,$days,$dbnew){
-
-    $date = date('Y-m-d');
-    $lday = date_create($date);
-    date_sub($lday,date_interval_create_from_date_string("$days days"));
-    $lastday = date_format($lday,"Y-m-d");
-    /*echo $lastday,$date;*/
-    $stat = $dbnew->query("SELECT SUM(view_count) AS VIEWS FROM viewcount WHERE lesson_id = :id and v_date<=:tday and v_date >:lastday",array("id"=>$lessonid,"tday"=>$date,"lastday"=>$lastday));
-    $stat =  $stat[0]["VIEWS"];
-    if ($stat == false){
-        return 0;
-    }
-    return $stat;
-}
-
 
 //fix as single query
 
-$statmant = $db->query("SELECT lesson_id FROM lesson");
-$statmentname = $db->query("SELECT name FROM lesson");
-
-
-$data_array  = array();
-foreach ($statmant as $lesson ){
-    $data_array[] = $lesson['lesson_id'];
+$statmant = $db->query("SELECT * FROM Product");
+//$statmentname = $db->query("SELECT name FROM lesson");
+/*
+foreach ($statmant as $row){
+    echo'<pre>';
+    var_dump($row['Product_Name']);
+    var_dump($row['currentStock']);
+    echo'</pre>';
 }
-
-$name_array  = array();
-foreach ($statmentname as $lessonname ){
-$name_array[] = $lessonname['name'];
-}
-
-
-
-
+*/
 
 ?>
 
@@ -67,15 +35,24 @@ $name_array[] = $lessonname['name'];
                 type: 'line'
             },
             title: {
-                text: 'Monthly Views'
+                text: 'Stock'
             },
             credits: false,
             xAxis: {
                 categories: [
-                    <?php for($x=0; $x<count($data_array); $x++){
+
+                    <?php
+                    foreach ($statmant as $row){
+                            echo "'".$row['Product_Name']."'";
+                            echo ",";
+                        }
+
+
+                /*
+                    for($x=0; $x<count($data_array); $x++){
                         echo "'".$name_array[$x]."'";
                         echo ",";
-                    }
+                    }*/
                     ?>
 
                 ]
@@ -83,7 +60,7 @@ $name_array[] = $lessonname['name'];
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Views'
+                    text: 'Stock'
                 }
             },
             tooltip: {
@@ -103,13 +80,23 @@ $name_array[] = $lessonname['name'];
                 }
             },
             series: [{
-                name: 'Views',
+                name: 'Stock',
                 data: [
-                    <?php for($x=0; $x<count($data_array); $x++)
+                    <?php
+
+                    foreach ($statmant as $row){
+                            echo $row['currentStock'];
+                            echo ",";
+                        }
+
+
+                    /*
+
+                    for($x=0; $x<count($data_array); $x++)
                             {
                                 echo countView($data_array[$x],30,$db);
                                 echo ",";
-                            }
+                            }*/
 
                     ?>
                 ]
@@ -128,15 +115,17 @@ $name_array[] = $lessonname['name'];
                 type: 'column'
             },
             title: {
-                text: 'Total views'
+                text: 'Current Stock'
             },
             credits: false,
             xAxis: {
                 categories: [
-                    <?php for($x=0; $x<count($data_array); $x++){
-                        echo "'".$name_array[$x]."'";
-                        echo ",";
-                    }
+                    <?php
+
+                      foreach ($statmant as $row){
+                            echo "'".$row['Product_Name']."'";
+                            echo ",";
+                        }
                     ?>
 
                 ]
@@ -144,7 +133,7 @@ $name_array[] = $lessonname['name'];
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Views'
+                    text: 'Stock'
                 }
             },
             tooltip: {
@@ -162,14 +151,17 @@ $name_array[] = $lessonname['name'];
                 }
             },
             series: [{
-                name: 'Views',
+                name: 'Stock',
                 color: 'Orange',
                 data: [
-                    <?php for($x=0; $x<count($data_array); $x++)
-                            {
-                                echo totalView($data_array[$x],$db);
-                                echo ",";
-                            }
+                    <?php
+
+                    foreach ($statmant as $row){
+                            echo $row['currentStock'];
+                            echo ",";
+                        }
+
+
 
                     ?>
                 ]

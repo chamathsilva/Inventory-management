@@ -73,7 +73,7 @@
 
 
     function removeItemFromStock(id){
-        $('#myModal' + id).on('hidden.bs.modal', function () {
+        $('#myModalremove' + id).on('hidden.bs.modal', function () {
             viewData()
 
         });

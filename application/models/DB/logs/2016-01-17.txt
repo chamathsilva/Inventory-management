@@ -1,3 +1,31 @@
+Time : 20:21:07
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
+Raw SQL : SELECT COUNT(*) FROM users where type = 2
+
+Time : 20:21:06
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
+Raw SQL : SELECT COUNT(*) FROM users where type = 2
+
+Time : 20:21:06
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
+Raw SQL : SELECT COUNT(*) FROM users where type = 2
+
+Time : 20:21:06
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
+Raw SQL : SELECT COUNT(*) FROM users where type = 2
+
+Time : 20:21:05
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
+Raw SQL : SELECT COUNT(*) FROM users where type = 2
+
+Time : 20:21:03
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
+Raw SQL : SELECT COUNT(*) FROM users where type = 2
+
+Time : 20:21:03
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
+Raw SQL : SELECT COUNT(*) FROM users where type = 2
+
 Time : 20:16:05
 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
 Raw SQL : SELECT COUNT(*) FROM users where type = 2
