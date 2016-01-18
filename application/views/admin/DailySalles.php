@@ -24,11 +24,11 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
         <div class="container" >
 
-            <div class="col-sm-12 col-sm-offset-1">
+            <div class="col-sm-12 ">
 
 
 
-            <form  style="" class="form" id="userUploadForm" >
+            <form  style="margin-left: 150px;" class="form" id="userUploadForm" >
 
             <div class="col-md-4 ">
                 <div class="form-group">
@@ -53,6 +53,15 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                     </select>
                 </div>
             </div>
+
+
+                <div class="col-md-4 col-md-offset-4">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Advance</label>
+                    <input type="text" class="form-control" id="Amount"  name="Amount" placeholder="Advance">
+                </div>
+              </div>
+
 
 
 

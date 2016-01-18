@@ -80,6 +80,11 @@
                 <a onclick="loadmaddmissing()"><i class="fa fa-fw fa-edit"></i>Add missings</a>
             </li>
 
+            <li>
+                <a onclick="loadremovemissings()"><i class="fa fa-fw fa-edit"></i>Remove missings</a>
+            </li>
+
+
 
             <li>
                 <a onclick="loadgetSalary()"><i class="fa fa-fw fa-edit"></i>Get Salary</a>

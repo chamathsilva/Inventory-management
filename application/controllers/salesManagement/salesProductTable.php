@@ -55,6 +55,12 @@
 
             },
 
+            Amount: {
+                required: true,
+                number :true
+
+            },
+
             CurrentDate: {
                 required: true
 
@@ -71,7 +77,7 @@
         $('#daliysubmit_btn').click( function() {
 
 
-            var m_data = table.$('input, select').serialize()+ "&CurrentDate=" + document.getElementById("CurrentDate" ).value + "&refname=" + document.getElementById("refname" ).value;
+            var m_data = table.$('input, select').serialize()+ "&CurrentDate=" + document.getElementById("CurrentDate" ).value + "&refname=" + document.getElementById("refname" ).value + "&Amount=" + document.getElementById("Amount" ).value;
 
             //$("#results").html(m_data);
             //Ajax post data to server

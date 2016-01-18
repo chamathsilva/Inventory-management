@@ -13,6 +13,7 @@ foreach ($_GET as $key => $value){
 
 $Ref_id      = filter_var($_GET["refname"], FILTER_SANITIZE_STRING);
 $date    = filter_var($_GET["CurrentDate"], FILTER_SANITIZE_STRING);
+$amount   = abs(filter_var($_GET["Amount"], FILTER_SANITIZE_STRING));
 
 $productIdlist = getProductId();
 
@@ -20,10 +21,15 @@ $result = 0;
 
 
 $db->beginTransaction();
-$total_salary = 0;
+
+if ($amount != 0){
+    $result = $db->query("INSERT INTO Advances (ref_id,Amount,Time_stamp) VALUES(:ref_id,:Amount,:Timestampd)",array("ref_id"=>$Ref_id,"Amount"=>$amount,"Timestampd"=>$date));
+}
+
+
 foreach ($productIdlist as $productid){
 
-
+    $total_salary = 0;
 
     $productInfo  = getProductInfo();
 
@@ -36,8 +42,6 @@ foreach ($productIdlist as $productid){
     //echo $sales.$return;
 
     if ($sales != 0 || $return != 0){
-        //save traction
-        $result = $db->query("INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns) VALUES(:Time_Stamp,:ref_id,:pro_id,:selles,:returns)",array("Time_Stamp"=> $date,"ref_id"=> $Ref_id,"pro_id"=> $productid,"selles"=> $sales,"returns"=> $return));
 
         if($sales != 0 ){
             //add entry for stock table
@@ -58,14 +62,18 @@ foreach ($productIdlist as $productid){
 
         }
 
+        //save traction
+        $result = $db->query("INSERT INTO Transaction (Time_Stamp,ref_id,product_id,selles,returns,commission) VALUES(:Time_Stamp,:ref_id,:pro_id,:selles,:returns,:commission)",array("Time_Stamp"=> $date,"ref_id"=> $Ref_id,"pro_id"=> $productid,"selles"=> $sales,"returns"=> $return,"commission"=> $total_salary));
+
+
     }
 
 }
 
 
 
-//insert Day commision to ref salary table
-$result = $db->query("INSERT INTO refSalary (ref_id,salary) VALUES (:ref_id,:salary)",array("ref_id" => $Ref_id, "salary" =>$total_salary));
+//insert Day commision to ref salary table - as new requirment refsalary table is not need
+//$result = $db->query("INSERT INTO refSalary (ref_id,salary) VALUES (:ref_id,:salary)",array("ref_id" => $Ref_id, "salary" =>$total_salary));
 
 $db->commit();
 
