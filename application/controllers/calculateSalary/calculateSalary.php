@@ -22,7 +22,7 @@ $Bonus      = abs(filter_var($_POST["Amount"], FILTER_SANITIZE_STRING));
 
 $db->beginTransaction();
 
-$salary = $db->query("SELECT * FROM refSalary WHERE DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$datestart,"ref_id"=>$Ref_id));
+$salary = $db->query("SELECT * FROM Transaction WHERE DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$datestart,"ref_id"=>$Ref_id));
 
 $missing = $db->query("SELECT * FROM Missing WHERE DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$datestart,"ref_id"=>$Ref_id));
 
@@ -36,7 +36,7 @@ $totalAdvaces = 0;
 
 //echo "Commision<br>";
 foreach ($salary as $srow){
-    $totalCommision += $srow['salary'];
+    $totalCommision += $srow['commission'];
     //$temp = date('Y-m-d',strtotime($srow['time_Stamp']));
     //$english_format_number = number_format($srow['salary'], 2, '.', '');
    // $padd = str_pad($english_format_number,20,' ',STR_PAD_LEFT);
