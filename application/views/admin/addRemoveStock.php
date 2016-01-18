@@ -25,6 +25,10 @@
 </div><!--do not remove -->
 
 <script>
+
+
+
+
     viewData();
     function viewData(){
         $.ajax({
@@ -98,6 +102,45 @@
                 if (response.type == "text"){
                     $("#results").html(response.text);
                     document.getElementById("Addform" + id).reset();
+                }else{
+                    $("#results").html(response.text);
+
+                }
+            }
+        });
+
+    }
+
+
+    function updateProduct(id){
+        $('#myModaledit' + id).on('hidden.bs.modal', function () {
+            viewData()
+
+        });
+
+
+        //alert("Remove item :" + id);
+        //get input field values data to be sent to server
+        var m_data = new FormData();
+        m_data.append( 'Pid',  id);
+        m_data.append( 'ProductName',  document.getElementById("ProductName" + id).value);
+        m_data.append( 'Cost',  document.getElementById("Cost" + id).value);
+        m_data.append( 'SellingPrice',  document.getElementById("SellingPrice" + id).value);
+        m_data.append( 'Commision',  document.getElementById("Commision" + id).value);
+
+        //Ajax post data to server
+        $.ajax({
+            url: '../../controllers/ManageStock/updateproduct.php',
+            data: m_data,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            dataType:'json',
+            success: function(response){
+                //load json data from server and output message
+                if (response.type == "text"){
+                    $("#results").html(response.text);
+                    document.getElementById("updateform" + id).reset();
                 }else{
                     $("#results").html(response.text);
 

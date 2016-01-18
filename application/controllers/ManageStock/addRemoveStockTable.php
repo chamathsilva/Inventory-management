@@ -21,9 +21,9 @@
         $id = $row['Product_id'];
         $name = $row['Product_Name'];
         $current_stock = $row['currentStock'];
-        $cost = number_format($row['Cost'], 2, '.', ',');
-        $sellingPrice =  number_format($row['Selling_price'], 2, '.', ',');
-        $commision =number_format($row['Commision'], 2, '.', ',');
+        $cost = number_format($row['Cost'], 2, '.', '');
+        $sellingPrice =  number_format($row['Selling_price'], 2, '.', '');
+        $commision =number_format($row['Commision'], 2, '.', '');
         $deleteButton = '<a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#myModalAdd'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>'.
             '<a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#myModalremove'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
             '<a class="btn btn-success btn-sm"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>'
@@ -89,7 +89,7 @@
                                       </div>
                                       <div class="modal-body">
 
-                                      <form id = "Removeform'.$id.'">
+                                      <form id = "updateform'.$id.'">
 
                                           <div class="form-group">
                                             <label for="Name">Product Name</label>
@@ -119,7 +119,7 @@
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" onclick = "removeItemFromStock('.$id.')" class="btn btn-primary" data-dismiss="modal">Update</button>
+                                        <button type="button" onclick = "updateProduct('.$id.')" class="btn btn-primary" data-dismiss="modal">Update</button>
                                       </div>
                                     </div>
                                   </div>
