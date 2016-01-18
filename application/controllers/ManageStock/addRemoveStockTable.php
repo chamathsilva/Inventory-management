@@ -4,6 +4,9 @@
         <th class="product-name">id</th>
         <th class="product-name">Product Name</th>
         <th class="product-name">Current Stock</th>
+        <th class="product-name">Cost</th>
+        <th class="product-name">Selling price</th>
+        <th class="product-name">Commision</th>
         <th class="product-quantity">Action</th>
     </tr>
     </thead>
@@ -17,10 +20,13 @@
     foreach ($product as $row) {
         $id = $row['Product_id'];
         $name = $row['Product_Name'];
-        $current_stock = $db->query("SELECT currentStock FROM Product WHERE Product_id = :pid ",array("pid" => $id));
-        $current_stock = $current_stock[0]["currentStock"];
+        $current_stock = $row['currentStock'];
+        $cost = number_format($row['Cost'], 2, '.', ',');
+        $sellingPrice =  number_format($row['Selling_price'], 2, '.', ',');
+        $commision =number_format($row['Commision'], 2, '.', ',');
         $deleteButton = '<a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#myModalAdd'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>'.
-            '<a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#myModalremove'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'
+            '<a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#myModalremove'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
+            '<a class="btn btn-success btn-sm"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>'
             .'<!--  Add Modal -->
                                 <div class="modal fade" id="myModalAdd'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
                                   <div class="modal-dialog" role="document">
@@ -73,6 +79,51 @@
                                     </div>
                                   </div>
                                 </div>'
+            .'<!--  remove Modal edit -->
+                                <div class="modal fade" id="myModaledit'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Edit '.$name.'</h4>
+                                      </div>
+                                      <div class="modal-body">
+
+                                      <form id = "Removeform'.$id.'">
+
+                                          <div class="form-group">
+                                            <label for="Name">Product Name</label>
+                                            <input type="text" class="form-control" name="ProductName'.$id.'" id="ProductName'.$id.'" value = "'.$name.'" placeholder="Product Name">
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label for="Name">Cost</label>
+                                            <input type="text" class="form-control" name="Cost'.$id.'" id="Cost'.$id.'" value = "'.$cost.'"  placeholder="Cost">
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label for="Name">Selling Price</label>
+                                            <input type="text" class="form-control" name="SellingPrice'.$id.'" id="SellingPrice'.$id.'" value = "'.$sellingPrice.'" placeholder="Selling Price">
+                                          </div>
+
+
+                                          <div class="form-group">
+                                            <label for="Name">Commision</label>
+                                            <input type="text" class="form-control" name="Commision'.$id.'" id="Commision'.$id.'" value = "'.$commision.'" placeholder="Commision">
+                                          </div>
+
+
+
+                                      </form>
+
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" onclick = "removeItemFromStock('.$id.')" class="btn btn-primary" data-dismiss="modal">Update</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>'
 
 
 
@@ -85,6 +136,9 @@
         echo '<td>' . $temp . '</td>';
         echo '<td>' . $name . '</td>';
         echo '<td>' . $current_stock . '</td>';
+        echo '<td>' . $cost . '</td>';
+        echo '<td>' . $sellingPrice . '</td>';
+        echo '<td>' . $commision . '</td>';
         echo '<td>' . $deleteButton . '</td>';
         $temp += 1;
         echo '</tr>';

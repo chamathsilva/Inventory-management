@@ -6,7 +6,7 @@ $db = new Db();
 
 //echo "Add product completed";
 
-$productname    = filter_var($_POST["productname"], FILTER_SANITIZE_STRING);
+$productname    = filter_var($_POST["productname"]);
 $productcost  = abs(filter_var($_POST["productcost"], FILTER_SANITIZE_STRING));
 $sellingprice    = abs(filter_var($_POST["sellingprice"], FILTER_SANITIZE_STRING));
 $commission    = abs(filter_var($_POST["commission"], FILTER_SANITIZE_STRING));

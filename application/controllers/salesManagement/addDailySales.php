@@ -86,7 +86,7 @@ if ($result == 1){
         'type'=>'text',
         'text' => '<div class="alert alert-success">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Success!</strong> Today Salary '.$total_salary.'.
+                        <strong>Success!</strong>
                         </div>'
     ));
 
