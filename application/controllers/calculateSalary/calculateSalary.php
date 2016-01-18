@@ -18,7 +18,7 @@ $Bonus      = abs(filter_var($_POST["Amount"], FILTER_SANITIZE_STRING));
 //echo "Current Month is : ".$datestart;
 
 
-
+$productinfo = getProductInfo();
 
 $db->beginTransaction();
 
@@ -36,11 +36,14 @@ $totalAdvaces = 0;
 
 //echo "Commision<br>";
 foreach ($salary as $srow){
+
+    //sales // retun ehema enna hadanna
     $totalCommision += $srow['commission'];
-    //$temp = date('Y-m-d',strtotime($srow['time_Stamp']));
-    //$english_format_number = number_format($srow['salary'], 2, '.', '');
+    $temp = date('Y-m-d',strtotime($srow['Time_Stamp']));
+    $english_format_number = number_format($srow['commission'], 2, '.', '');
+    $product = $productinfo[$srow['product_id']]['Product_Name'];
    // $padd = str_pad($english_format_number,20,' ',STR_PAD_LEFT);
-   //echo $temp."-->".$padd."<br>";
+    echo $temp."-->".$english_format_number."--->".$product."<br>";
     //var_dump($srow) ;
 }
 

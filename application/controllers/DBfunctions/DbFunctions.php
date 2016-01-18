@@ -146,6 +146,7 @@
             $data_array[$product["Product_id"]]['Commision'] = $product["Commision"];
             $data_array[$product["Product_id"]]['Selling_price'] = $product["Selling_price"];
             $data_array[$product["Product_id"]]['Cost'] = $product["Cost"];
+            $data_array[$product["Product_id"]]['Product_Name'] = $product["Product_Name"];
         }
         //return floatval($data_array['6']['Commision']);
         return $data_array;
