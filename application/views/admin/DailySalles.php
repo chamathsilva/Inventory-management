@@ -22,12 +22,15 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
             </br>
         </div>
 
+        <div class="container" >
+
+            <div class="col-sm-12 col-sm-offset-1">
 
 
 
-        <form class="form" id="userUploadForm" >
+            <form  style="" class="form" id="userUploadForm" >
 
-            <div class="col-lg-4">
+            <div class="col-md-4 ">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Date</label>
                     <div id="datetimepicker1" class="input-append date">
@@ -37,7 +40,7 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="refname">Ref Name</label>
                     <select class="form-control" id="refname" name="refname">
@@ -54,11 +57,11 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
 
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-sm-8 ">
                 <div style="margin-top: 50px;" id= "product_table"></div>
             </div>
 
-            <div class="col-lg-8 text-right " style="margin-top: 50px;">
+            <div class="col-sm-8 text-right " style="margin-top: 50px;">
                 <div class="form-group">
                     <button type="button" id = "daliysubmit_btn" name="daliysubmit_btn" class="btn btn-info" value="Submit">Submit</button>
                 </div>
@@ -68,6 +71,8 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
         </form>
 
     </div>
+        </div>
+        </div>
 </div><!--do not remove -->
 
 

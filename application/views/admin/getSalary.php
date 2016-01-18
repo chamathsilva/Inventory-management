@@ -18,7 +18,7 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
         <div class="container" >
 
-            <div class="col-sm-8">
+            <div class="col-sm-8 col-sm-offset-1">
 
 
                 <form class="form-horizontal" id="userUploadForm" method = "POST" action="../../controllers/calculateSalary/calculateSalary.php" enctype="multipart/form-data">
@@ -33,6 +33,7 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                         </div>
                     </div>
 
+                    <!--
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="CurrentDateend">End date</label>
@@ -41,7 +42,7 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                                 <input data-format="yyyy-MM" id="CurrentDateend" name="CurrentDateend" type="text"> </input>
                             </div>
                         </div>
-                     </div>
+                     </div>-->
 
 
                     <div class="row">
@@ -91,6 +92,7 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
         </div>
     </div>
 </div><!--do not remove -->
+
 
 
 <script type="text/javascript">
@@ -146,7 +148,6 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
         $('#submit_btn').show(); //hide submit button
         $('#loading-img').hide(); //hide submit button
         $('#progressbox').delay( 1000 ).fadeOut(); //hide progress bar
-        //$('#output').delay( 1000 ).empty(); //empty return  text
 
     }
 
@@ -155,10 +156,15 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
     function beforeSubmit(){
         if (!$('#userUploadForm').valid()) {
-            alert("form is invalid");
+            //alert("form is invalid");
             return false;
         }
-        alert("form is valid");
+        //alert("form is valid");
+        var datee = document.getElementById("CurrentDatestart").value;
+        var namee = document.getElementById("refname").value;
+        var amount = document.getElementById("Amount").value;
+
+        window.open('../../controllers/calculateSalary/paysheet.php?refname='+ namee +'&CurrentDatestart='+datee +'&Amount='+ amount,'_blank');
     }
 
 
@@ -195,9 +201,10 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
             pickTime: false
         });
 
+        /*
         $('#datetimepicker2').datetimepicker({
             language: 'us'
-        });
+        });*/
     });
 
 

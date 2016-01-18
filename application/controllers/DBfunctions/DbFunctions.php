@@ -152,6 +152,14 @@
 
     }
 
+    function getrefName($id){
+        global $db;
+        $refname = $db->query("SELECT Ref_Name FROM Ref WHERE Ref_id = :rid ",array("rid" =>$id ));
+        return $refname[0]['Ref_Name'];
+
+
+    }
+
 
 
 
@@ -183,3 +191,4 @@
     //d(getRefList(),"getRefList");
     //d(getProductId(),"getProductId");
    // d(getProductInfo(),"getProductInfo");
+    //d(getrefName(4),"getrefName");

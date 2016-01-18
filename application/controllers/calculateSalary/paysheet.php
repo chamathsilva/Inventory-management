@@ -1,14 +1,59 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: chamathsilva
- * Date: 1/17/16
- * Time: 11:59 PM
- */
+require_once("../../controllers/DBfunctions/DbFunctions.php");
+require_once('../../../assets/pdf/fpdf.php');
+
+//Sanitize input data using PHP filter_var().
+
+$Ref_id      = filter_var($_GET["refname"], FILTER_SANITIZE_STRING);
+$datestart        = filter_var($_GET["CurrentDatestart"], FILTER_SANITIZE_STRING);
+$Bonus      = abs(filter_var($_GET["Amount"], FILTER_SANITIZE_STRING));
 
 
 
-require('../../../assets/pdf/fpdf.php');
+//echo $Ref_id.$datestart.$Bonus;
+
+$db->beginTransaction();
+
+$salary = $db->query("SELECT * FROM refSalary WHERE DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$datestart,"ref_id"=>$Ref_id));
+
+$missing = $db->query("SELECT * FROM Missing WHERE DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$datestart,"ref_id"=>$Ref_id));
+
+$advance = $db->query("SELECT * FROM Advances WHERE DATE_FORMAT(Time_stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$datestart,"ref_id"=>$Ref_id));
+
+
+$name = getrefName($Ref_id);
+$totalSalary = 0;
+$totalCommision = 0;
+$totalMissings = 0;
+$totalAdvaces = 0;
+
+
+//echo "Commision<br>";
+foreach ($salary as $srow){
+    $totalCommision += $srow['salary'];
+
+}
+
+//echo "Missings<br>";
+foreach ($missing as $mrow){
+    $totalMissings += $mrow['totalMissingcost'];
+
+}
+
+//echo "Advances<br>";
+foreach ($advance as $arow){
+    $totalAdvaces += $arow['Amount'];
+
+}
+
+$totalAdditions = $totalCommision + $Bonus;
+$totalDeductions = $totalMissings + $totalAdvaces;
+$totalSalary = $totalAdditions - $totalDeductions;
+
+//echo "<br>Total salary : $totalSalary.$totalDeductions.$totalAdditions";
+
+
+$db->commit();
 
 
 
@@ -73,47 +118,6 @@ class PDF extends FPDF
         return $data;
     }
 
-
-    // Colored table
-    function FancyTable($header, $data,$margin)
-    {
-        // Colors, line width and bold font
-        $this->SetFillColor(100);
-        $this->SetTextColor(255);
-        $this->SetDrawColor(100);
-        $this->SetLineWidth(.3);
-        $this->SetFont('Arial','B',7);
-        $this->Cell($margin);
-        // Header
-        $w = array(40, 35, 40, 45);
-        for($i=0;$i<count($header);$i++)
-            $this->Cell($w[$i],6,$header[$i],1,0,'L',true);
-        $this->Ln();
-        // Color and font restoration
-        $this->SetFillColor(230);
-        $this->SetTextColor(0);
-        $this->SetFont('Arial','',7);
-        // Data
-        $fill = false;
-
-        foreach($data as $row)
-        {   $this->Cell($margin);
-            $this->Cell($w[0],6,$row[0],'LR',0,'L',$fill);
-
-            $this->Cell($w[1],6,$row[1],'LR',0,'R',$fill);
-
-            $this->Cell($w[2],6,number_format($row[2]),'LR',0,'L',$fill);
-
-            $this->Cell($w[3],6,number_format($row[3]),'LR',0,'R',$fill);
-
-            $this->Ln();
-            $fill = !$fill;
-        }
-        // Closing line
-        $this->Cell($margin);
-        $this->Cell(array_sum($w),0,'','T');
-        $this->Ln(10);
-    }
 
 
     function FancyTable2($header, $data,$margin,$totalAddition,$totaldeduction,$netTotal)
@@ -228,9 +232,9 @@ $pdf->ChapterTitle("Salary Slip");
 
 $pdf->Cell(15);
 $pdf->SetFont('Times','',11);
-$pdf->Cell(40,5,'Employee Name  :',0,1);
+$pdf->Cell(40,5,"Employee Name  : $name",0,1);
 $pdf->Cell(15);
-$pdf->Cell(40,5,'Month & Year     :',0,1);
+$pdf->Cell(40,5,"Year & Month     : $datestart",0,1);
 $pdf->Ln(15);
 
 ////////
@@ -248,13 +252,13 @@ $header = array('Earnings', 'Rs', 'Deductions', 'Rs');
 // Data loading
 
 $data2 = array();
-$data2[] = array("Commissions","12123.23","Advances","167.66");
-$data2[] = array("Bonus","0","Missing","127.89");
+$data2[] = array("Commissions",$totalCommision,"Advances",$totalAdvaces);
+$data2[] = array("Bonus",$Bonus,"Missing",$totalMissings);
 
 
 
 //$data = $pdf->LoadData('countries2.txt');
-$pdf->FancyTable2($header,$data2,15,'12321.213',213.2312,12321.89);
+$pdf->FancyTable2($header,$data2,15,$totalAdditions,$totalDeductions,$totalSalary);
 $pdf->Ln(4);
 
 
@@ -287,6 +291,6 @@ $pdf->Cell(40,0,'Head of Account ',0,1);
 
 //for($i=1;$i<=40;$i++)
     //$pdf->Cell(0,10,'Printing line number '.$i,0,1);
-$pdf->Output('I');
+$pdf->Output('D',"Salary_Slip_$name.pdf");
 
 ?>

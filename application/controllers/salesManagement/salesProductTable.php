@@ -41,10 +41,10 @@
 
     function mytest(){
         if (!$('#userUploadForm').valid()) {
-            alert("form is invalid");
+            //alert("form is invalid");
             return false;
         }
-        alert("form is valid");
+        //alert("form is valid");
     }
 
 
@@ -73,7 +73,7 @@
 
             var m_data = table.$('input, select').serialize()+ "&CurrentDate=" + document.getElementById("CurrentDate" ).value + "&refname=" + document.getElementById("refname" ).value;
 
-            $("#results").html(m_data);
+            //$("#results").html(m_data);
             //Ajax post data to server
             $.ajax({
                 url: '../../controllers/salesManagement/addDailySales.php',

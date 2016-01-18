@@ -14,7 +14,7 @@
     </ol>
 
 
-    <div class="col-lg-12">
+    <div class="col-md-10 col-md-offset-1">
         <div id = "results"></div>
         </br>
         <div id= "lesson_table"></div>
@@ -43,7 +43,7 @@
 
         });
 
-        alert("add item :" + id);
+        //alert("add item :" + id);
         //get input field values data to be sent to server
         var m_data = new FormData();
         m_data.append( 'Pid',  id);
@@ -79,7 +79,7 @@
         });
 
 
-        alert("Remove item :" + id);
+        //alert("Remove item :" + id);
         //get input field values data to be sent to server
         var m_data = new FormData();
         m_data.append( 'Pid',  id);

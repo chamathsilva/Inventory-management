@@ -1,0 +1,15 @@
+Time : 08:44:45
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.feedback' doesn't exist
+Raw SQL : SELECT * FROM feedback
+
+Time : 08:44:30
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.feedback' doesn't exist
+Raw SQL : SELECT * FROM feedback
+
+Time : 08:41:53
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.feedback' doesn't exist
+Raw SQL : SELECT * FROM feedback
+
+Time : 08:38:38
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.feedback' doesn't exist
+Raw SQL : SELECT * FROM feedback LIMIT 4

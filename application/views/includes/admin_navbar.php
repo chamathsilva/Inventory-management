@@ -17,16 +17,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="admin navbar-brand" href="adminHome.php">UCSC VideoBay Admin</a>
+        <a class="admin navbar-brand" href="adminHome.php">Selikno Holding (PVT) Ltd.</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="admin nav navbar-right top-nav">
+        <!--
         <li class="dropdown">
             <a onclick="loadfeedback()" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope"></i> <b class="caret"></b></a>
             <ul class="dropdown-menu message-dropdown" id="feedback_dropdown">
 
             </ul>
-        </li>
+        </li> -->
 
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
@@ -90,9 +91,10 @@
             </li>
 
 
+            <!--
             <li>
                 <a onclick="loadmasseges()"><i class="fa fa-fw fa-edit"></i>Messages</a>
-            </li>
+            </li> -->
 
         </ul>
 

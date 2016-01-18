@@ -18,7 +18,7 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
         <div class="container" >
 
-            <div class="col-sm-8">
+            <div class="col-sm-8 col-sm-offset-1">
 
 
 
@@ -131,10 +131,10 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
     function beforeSubmit(){
         if (!$('#userUploadForm').valid()) {
-            alert("form is invalid");
+            //alert("form is invalid");
             return false;
         }
-        alert("form is valid");
+        //alert("form is valid");
     }
 
 
