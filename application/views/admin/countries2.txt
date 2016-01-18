@@ -1,0 +1,2 @@
+Commissions;12123.23;Advances;167.66
+Bonus;0;Missing;127.89

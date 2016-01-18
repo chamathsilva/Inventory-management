@@ -1,3 +1,7 @@
+Time : 20:43:50
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.feedback' doesn't exist
+Raw SQL : SELECT * FROM feedback
+
 Time : 20:21:07
 SQLSTATE[42S02]: Base table or view not found: 1146 Table 'inventory.users' doesn't exist
 Raw SQL : SELECT COUNT(*) FROM users where type = 2
