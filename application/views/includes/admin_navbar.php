@@ -93,6 +93,10 @@
                 <a onclick="loadgetSalary()"><i class="fa fa-fw fa-edit"></i>Get Salary</a>
             </li>
 
+            <li>
+                <a onclick=" loadperformanceReport()"><i class="fa fa-fw fa-edit"></i>Get Performance</a>
+            </li>
+
 
             <li>
                 <a onclick="loadaddref()"><i class="fa fa-fw fa-edit"></i>Add ref</a>

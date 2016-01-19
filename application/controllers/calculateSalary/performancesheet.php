@@ -6,9 +6,6 @@ require_once('../../../assets/pdf/fpdf.php');
 
 $Ref_id      = filter_var($_GET["refname"], FILTER_SANITIZE_STRING);
 $datestart        = filter_var($_GET["CurrentDatestart"]);
-$Bonus      = abs(filter_var($_GET["Amount"], FILTER_SANITIZE_STRING));
-$telephoneCost = abs(filter_var($_GET["Tchargers"], FILTER_SANITIZE_STRING));
-
 
 
 $commisionn = getMonthlySaleSummary($Ref_id,$datestart);
@@ -387,6 +384,6 @@ $pdf->Cell(40,0,'Head of Account ',0,1);
 /////
 */
 
-$pdf->Output('D',"Performances_sheet_$name.pdf");
+$pdf->Output('I',"Performances_sheet_$name.pdf");
 
 ?>

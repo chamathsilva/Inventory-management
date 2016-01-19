@@ -345,6 +345,6 @@ $pdf->Cell(40,0,'Head of Account ',0,1);
 
 //for($i=1;$i<=40;$i++)
     //$pdf->Cell(0,10,'Printing line number '.$i,0,1);
-$pdf->Output('D',"Salary_Slip_$name.pdf");
+$pdf->Output('I',"Salary_Slip_$name.pdf");
 
 ?>

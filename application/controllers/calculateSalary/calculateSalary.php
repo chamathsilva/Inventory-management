@@ -2,11 +2,11 @@
 require_once("../../controllers/DBfunctions/DbFunctions.php");
 
 //Sanitize input data using PHP filter_var().
-$Ref_id      = filter_var($_POST["refname"], FILTER_SANITIZE_STRING);
-$datestart        = filter_var($_POST["CurrentDatestart"], FILTER_SANITIZE_STRING);
+#$Ref_id      = filter_var($_POST["refname"], FILTER_SANITIZE_STRING);
+#$datestart        = filter_var($_POST["CurrentDatestart"], FILTER_SANITIZE_STRING);
 //$dateend        = filter_var($_POST["CurrentDateend"], FILTER_SANITIZE_STRING);
-$Bonus      = abs(filter_var($_POST["Amount"], FILTER_SANITIZE_STRING));
-$telephoneCost = abs(filter_var($_POST["TChargers"], FILTER_SANITIZE_STRING));
+#$Bonus      = abs(filter_var($_POST["Amount"], FILTER_SANITIZE_STRING));
+#$telephoneCost = abs(filter_var($_POST["TChargers"], FILTER_SANITIZE_STRING));
 
 //echo "hello how are you.$Ref_id.$datestart.$dateend.$Bonus";
 
