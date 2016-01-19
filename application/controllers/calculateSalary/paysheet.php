@@ -166,6 +166,23 @@ class PDF extends FPDF
             $fill = !$fill;
         }
         $this->Cell($margin);
+        $this->Cell($w[0],6,"Target commision",'LR',0,'L',$fill);
+
+        global $Bonus;
+
+        $this->Cell($w[1],6,number_format($Bonus,2, '.', ','),'LR',0,'R',$fill);
+
+        $this->Cell($w[2],6,"",'LR',0,'L',$fill);
+
+        $this->Cell($w[3],6,"",'LR',0,'R',$fill);
+
+        $this->Ln();
+        $fill = !$fill;
+
+
+
+
+        $this->Cell($margin);
         $this->Cell($w[0],6,"",'LR',0,'L',$fill);
 
         $this->Cell($w[1],6,"",'LR',0,'R',$fill);
@@ -176,6 +193,7 @@ class PDF extends FPDF
 
         $this->Ln();
         $fill = !$fill;
+
 
         $this->Cell($margin);
         $this->Cell($w[0],6,"Total Addition",'LR',0,'L',$fill);
@@ -207,9 +225,9 @@ class PDF extends FPDF
         $this->SetFillColor(100);
         $this->SetTextColor(255);
         $this->Cell($margin);
-        $this->Cell($w[0],6,"",'LR',0,'L',$fill);
+        $this->Cell($w[0],6,"",'LR',0,'L',true);
 
-        $this->Cell($w[1],6,"",'LR',0,'R',$fill);
+        $this->Cell($w[1],6,"",'LR',0,'R',true);
 
         $this->Cell($w[2],6,"NET Salary",'LR',0,'L',true);
 
@@ -288,6 +306,7 @@ $data2 = array();
 $data2[] = array("Sales Commissions",$SalesCommision,"Salary Advances",$totalAdvaces);
 //$data2[] = array("Bonus",$Bonus,"Missing",$totalMissings);
 $data2[] = array("Telephon allowanc",500,"Telephone Cost",$telephoneCost);
+
 $data2[] = array("Other Earnings",0,"No pay deduction ",0);
 
 
