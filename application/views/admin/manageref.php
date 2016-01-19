@@ -61,7 +61,9 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
                 <div class="row">
                     <div class="col-md-12 ">
-                        <div id = "results"></div>
+                        <div id="results" ></div>
+                        <br>
+                        <div id = "tablediv"></div>
                     </div>
                 </div>
 
@@ -110,9 +112,9 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                     type: "post",
                     processData: false,
                     contentType: false,
-                    url: "../../controllers/salesManagement/updatedailsales.php",
+                    url: "../../controllers/salesManagement/updatedailsales.php"
                 }).done(function(data){
-                    $("#results").html(data);
+                    $("#tablediv").html(data);
 
                 });
 
@@ -136,6 +138,109 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 </script>
 
 <script type="text/javascript">
+
+    function deletMissings(missinid,productid,amount){
+        alert("How are you missins" + missinid + productid + amount );
+
+
+        var m_data = new FormData();
+        m_data.append( 'missinid',  missinid);
+        m_data.append( 'productid',  productid);
+        m_data.append( 'amount',  amount);
+
+        //Ajax post data to server
+        $.ajax({
+            url: '../../controllers/addMissing/deleteMissings.php',
+            data: m_data,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            dataType:'json',
+            success: function(response){
+                //load json data from server and output message
+                if (response.type == "text"){
+                    $("#results").html(response.text);
+                    // reload the data table
+                    $("#getrefinfo").click();
+
+
+                }else{
+                    $("#results").html(response.text);
+
+                }
+            }
+        });
+
+
+    }
+
+    function deleteAdvace(advanceid){
+        alert("How are you advance" +  advanceid);
+
+        var m_data = new FormData();
+        m_data.append( 'advanceid',  advanceid);
+
+        //Ajax post data to server
+        $.ajax({
+            url: '../../controllers/Advance/deleteAdvace.php',
+            data: m_data,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            dataType:'json',
+            success: function(response){
+                //load json data from server and output message
+                if (response.type == "text"){
+                    $("#results").html(response.text);
+                    // reload the data table
+                    $("#getrefinfo").click();
+
+
+                }else{
+                    $("#results").html(response.text);
+
+                }
+            }
+        });
+
+    }
+
+    function deleteSales(trasactionid,productid,sales,returns){
+        alert("How are you sales" +  returns +  trasactionid + productid + sales);
+
+
+        var m_data = new FormData();
+        m_data.append( 'trasactionid',  trasactionid);
+        m_data.append( 'productid',  productid);
+        m_data.append( 'sales',  sales);
+        m_data.append( 'returns',  returns);
+
+        //Ajax post data to server
+        $.ajax({
+            url: '../../controllers/salesManagement/deletedailentry.php',
+            data: m_data,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            dataType:'json',
+            success: function(response){
+                //load json data from server and output message
+                if (response.type == "text"){
+                    $("#results").html(response.text);
+                    // reload the data table
+                    $("#getrefinfo").click();
+
+
+                }else{
+                    $("#results").html(response.text);
+
+                }
+            }
+        });
+
+
+    }
+
     $(function() {
         $('#datetimepickerinfo').datetimepicker({
             language: 'us',

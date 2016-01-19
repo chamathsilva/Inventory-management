@@ -1,10 +1,26 @@
 <?php
 
-require("../../models/DB/Db.class.php");
-$db = new Db();
-echo "hello world";
+require_once("../../controllers/DBfunctions/DbFunctions.php");
 
-echo $_POST['CurrentDate'];?>
+//echo $_POST['CurrentDate'];
+//Sanitize input data using PHP filter_var().
+$Ref_id      = filter_var($_POST["refname"], FILTER_SANITIZE_STRING);
+$datestart        = filter_var($_POST["CurrentDate"], FILTER_SANITIZE_STRING);
+
+$dateYM = date('Y-m',strtotime($datestart)); // for month search
+
+
+$productinfo = getProductInfo();
+
+$dailySales = $db->query("SELECT * FROM Transaction WHERE DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$dateYM,"ref_id"=>$Ref_id));
+
+$missing = $db->query("SELECT * FROM Missing WHERE DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$dateYM,"ref_id"=>$Ref_id));
+
+$advance = $db->query("SELECT * FROM Advances WHERE DATE_FORMAT(Time_stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$dateYM,"ref_id"=>$Ref_id));
+
+
+?>
+
 
 
 <div>
@@ -22,10 +38,10 @@ echo $_POST['CurrentDate'];?>
     <thead>
     <tr>
         <th class="product-name">id</th>
-        <th class="product-name">Product Name</th>
-        <th class="product-name">Current Stock</th>
-        <th class="product-name">Cost</th>
-        <th class="product-name">Selling price</th>
+        <th class="product-name">Date</th>
+        <th class="product-name">Product</th>
+        <th class="product-name">Sales</th>
+        <th class="product-name">Return</th>
         <th class="product-name">Commision</th>
         <th class="product-quantity">Action</th>
     </tr>
@@ -34,104 +50,43 @@ echo $_POST['CurrentDate'];?>
 
     <?php
 
-    $product = $db->query("SELECT * FROM Product");
+    //$product = $db->query("SELECT * FROM Product");
     $temp = 1;
-    foreach ($product as $row) {
-        $id = $row['Product_id'];
-        $name = $row['Product_Name'];
-        $current_stock = $row['currentStock'];
-        $cost = number_format($row['Cost'], 2, '.', '');
-        $sellingPrice =  number_format($row['Selling_price'], 2, '.', '');
-        $commision =number_format($row['Commision'], 2, '.', '');
-        $deleteButton = '<a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#myModalAdd'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>'.
-            '<a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#myModalremove'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
+    foreach ($dailySales as $row) {
+        $id = $row['Transaction_id'];
+        $productIDD = $row['product_id'];
+        $name = $productinfo[$productIDD]['Product_Name'];
+        $sales = $row['selles'];
+        $return = $row['returns'];
+        $commision =  number_format($row['commission'], 2, '.', '');
+        $date = date('Y-m-d',strtotime($row['Time_Stamp']));
+
+        $deleteButton =
+            '<a class="btn btn-danger btn-sm"  onclick="deleteSales('.$id.','.$productIDD.','.$sales.','.$return.')" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
             '<a class="btn btn-success btn-sm"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>'
-            .'<!--  Add Modal -->
-                                <div class="modal fade" id="myModalAdd'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Add '.$name.' To Stock</h4>
-                                      </div>
-                                      <div class="modal-body">
 
-                                      <form id = "Addform'.$id.'">
-
-                                          <div class="form-group">
-                                            <label for="Name">Amount</label>
-                                            <input type="text" class="form-control" name="addamount'.$id.'" id="addamount'.$id.'" placeholder="Amount">
-                                          </div>
-                                      </form>
-
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" onclick = "addItemToStock('.$id.')" class="btn btn-primary" data-dismiss="modal">Add New Stock</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>'
-            .'<!--  remove Modal -->
-                                <div class="modal fade" id="myModalremove'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Remove '.$name.' from Stock</h4>
-                                      </div>
-                                      <div class="modal-body">
-
-                                      <form id = "Removeform'.$id.'">
-
-                                          <div class="form-group">
-                                            <label for="Name">Amount</label>
-                                            <input type="text" class="form-control" name="removeamount'.$id.'" id="removeamount'.$id.'" placeholder="Amount">
-                                          </div>
-                                      </form>
-
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" onclick = "removeItemFromStock('.$id.')" class="btn btn-primary" data-dismiss="modal">Remove from current Stock</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>'
             .'<!--  remove Modal edit -->
                                 <div class="modal fade" id="myModaledit'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Edit '.$name.'</h4>
+                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Edit Sales info</h4>
                                       </div>
                                       <div class="modal-body">
 
                                       <form id = "updateform'.$id.'">
 
+
                                           <div class="form-group">
-                                            <label for="Name">Product Name</label>
-                                            <input type="text" class="form-control" name="ProductName'.$id.'" id="ProductName'.$id.'" value = "'.$name.'" placeholder="Product Name">
+                                            <label for="Name">Sales</label>
+                                            <input type="text" class="form-control" name="Sales'.$id.'" id="Sales'.$id.'" value = "'.$sales.'"  placeholder="Sales">
                                           </div>
 
                                           <div class="form-group">
-                                            <label for="Name">Cost</label>
-                                            <input type="text" class="form-control" name="Cost'.$id.'" id="Cost'.$id.'" value = "'.$cost.'"  placeholder="Cost">
+                                            <label for="Name">Returns</label>
+                                            <input type="text" class="form-control" name="Returns'.$id.'" id="Returns'.$id.'" value = "'.$return.'" placeholder="Returns">
                                           </div>
-
-                                          <div class="form-group">
-                                            <label for="Name">Selling Price</label>
-                                            <input type="text" class="form-control" name="SellingPrice'.$id.'" id="SellingPrice'.$id.'" value = "'.$sellingPrice.'" placeholder="Selling Price">
-                                          </div>
-
-
-                                          <div class="form-group">
-                                            <label for="Name">Commision</label>
-                                            <input type="text" class="form-control" name="Commision'.$id.'" id="Commision'.$id.'" value = "'.$commision.'" placeholder="Commision">
-                                          </div>
-
-
 
                                       </form>
 
@@ -144,19 +99,14 @@ echo $_POST['CurrentDate'];?>
                                   </div>
                                 </div>'
 
-
-
-
-
-
         ;
 
         echo '<tr>';
         echo '<td>' . $temp . '</td>';
+        echo '<td>' . $date . '</td>';
         echo '<td>' . $name . '</td>';
-        echo '<td>' . $current_stock . '</td>';
-        echo '<td>' . $cost . '</td>';
-        echo '<td>' . $sellingPrice . '</td>';
+        echo '<td>' . $sales . '</td>';
+        echo '<td>' . $return . '</td>';
         echo '<td>' . $commision . '</td>';
         echo '<td>' . $deleteButton . '</td>';
         $temp += 1;
@@ -173,113 +123,42 @@ echo $_POST['CurrentDate'];?>
             <table class="table table-striped table-hover" id="tabledata2">
                 <thead>
                 <tr>
-                    <th class="product-name">id</th>
-                    <th class="product-name">Product Name</th>
-                    <th class="product-name">Current Stock</th>
-                    <th class="product-name">Cost</th>
-                    <th class="product-name">Selling price</th>
-                    <th class="product-name">Commision</th>
+                    <th class="product-name">Id</th>
+                    <th class="product-name">Date</th>
+                    <th class="product-name">Amount</th>
                     <th class="product-quantity">Action</th>
                 </tr>
                 </thead>
                 <tbody >
 
                 <?php
-                $product = $db->query("SELECT * FROM Product");
+
                 $temp = 1;
-                foreach ($product as $row) {
-                    $id = $row['Product_id'];
-                    $name = $row['Product_Name'];
-                    $current_stock = $row['currentStock'];
-                    $cost = number_format($row['Cost'], 2, '.', '');
-                    $sellingPrice =  number_format($row['Selling_price'], 2, '.', '');
-                    $commision =number_format($row['Commision'], 2, '.', '');
-                    $deleteButton = '<a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#myModalAdd'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>'.
-                        '<a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#myModalremove'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
+                foreach ($advance as $row) {
+                    $id = $row['Advance_id'];
+                    $date = date('Y-m-d',strtotime($row['Time_stamp']));
+                    $amount =  number_format($row['Amount'], 2, '.', '');
+
+                    $deleteButton =
+                        '<a class="btn btn-danger btn-sm"  onclick="deleteAdvace('.$id.')" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
                         '<a class="btn btn-success btn-sm"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>'
-                        .'<!--  Add Modal -->
-                                <div class="modal fade" id="myModalAdd'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Add '.$name.' To Stock</h4>
-                                      </div>
-                                      <div class="modal-body">
 
-                                      <form id = "Addform'.$id.'">
 
-                                          <div class="form-group">
-                                            <label for="Name">Amount</label>
-                                            <input type="text" class="form-control" name="addamount'.$id.'" id="addamount'.$id.'" placeholder="Amount">
-                                          </div>
-                                      </form>
-
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" onclick = "addItemToStock('.$id.')" class="btn btn-primary" data-dismiss="modal">Add New Stock</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>'
-                        .'<!--  remove Modal -->
-                                <div class="modal fade" id="myModalremove'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Remove '.$name.' from Stock</h4>
-                                      </div>
-                                      <div class="modal-body">
-
-                                      <form id = "Removeform'.$id.'">
-
-                                          <div class="form-group">
-                                            <label for="Name">Amount</label>
-                                            <input type="text" class="form-control" name="removeamount'.$id.'" id="removeamount'.$id.'" placeholder="Amount">
-                                          </div>
-                                      </form>
-
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" onclick = "removeItemFromStock('.$id.')" class="btn btn-primary" data-dismiss="modal">Remove from current Stock</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>'
                         .'<!--  remove Modal edit -->
                                 <div class="modal fade" id="myModaledit'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Edit '.$name.'</h4>
+                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Edit Advance</h4>
                                       </div>
                                       <div class="modal-body">
 
                                       <form id = "updateform'.$id.'">
 
                                           <div class="form-group">
-                                            <label for="Name">Product Name</label>
-                                            <input type="text" class="form-control" name="ProductName'.$id.'" id="ProductName'.$id.'" value = "'.$name.'" placeholder="Product Name">
-                                          </div>
-
-                                          <div class="form-group">
-                                            <label for="Name">Cost</label>
-                                            <input type="text" class="form-control" name="Cost'.$id.'" id="Cost'.$id.'" value = "'.$cost.'"  placeholder="Cost">
-                                          </div>
-
-                                          <div class="form-group">
-                                            <label for="Name">Selling Price</label>
-                                            <input type="text" class="form-control" name="SellingPrice'.$id.'" id="SellingPrice'.$id.'" value = "'.$sellingPrice.'" placeholder="Selling Price">
-                                          </div>
-
-
-                                          <div class="form-group">
-                                            <label for="Name">Commision</label>
-                                            <input type="text" class="form-control" name="Commision'.$id.'" id="Commision'.$id.'" value = "'.$commision.'" placeholder="Commision">
+                                            <label for="Name">Amount</label>
+                                            <input type="text" class="form-control" name="Amount'.$id.'" id="Amount'.$id.'" value = "'.$amount.'" placeholder="Amount">
                                           </div>
 
 
@@ -295,20 +174,12 @@ echo $_POST['CurrentDate'];?>
                                   </div>
                                 </div>'
 
-
-
-
-
-
                     ;
 
                     echo '<tr>';
                     echo '<td>' . $temp . '</td>';
-                    echo '<td>' . $name . '</td>';
-                    echo '<td>' . $current_stock . '</td>';
-                    echo '<td>' . $cost . '</td>';
-                    echo '<td>' . $sellingPrice . '</td>';
-                    echo '<td>' . $commision . '</td>';
+                    echo '<td>' . $date . '</td>';
+                    echo '<td>' . $amount . '</td>';
                     echo '<td>' . $deleteButton . '</td>';
                     $temp += 1;
                     echo '</tr>';
@@ -322,12 +193,11 @@ echo $_POST['CurrentDate'];?>
             <table class="table table-striped table-hover" id="tabledata3">
                 <thead>
                 <tr>
-                    <th class="product-name">id</th>
-                    <th class="product-name">Product Name</th>
-                    <th class="product-name">Current Stock</th>
-                    <th class="product-name">Cost</th>
-                    <th class="product-name">Selling price</th>
-                    <th class="product-name">Commision</th>
+                    <th class="product-name">Id</th>
+                    <th class="product-name">Date</th>
+                    <th class="product-name">Product</th>
+                    <th class="product-name">Amount</th>
+                    <th class="product-name">Total Deduction</th>
                     <th class="product-quantity">Action</th>
                 </tr>
                 </thead>
@@ -335,102 +205,36 @@ echo $_POST['CurrentDate'];?>
 
                 <?php
 
-                $product = $db->query("SELECT * FROM Product");
                 $temp = 1;
-                foreach ($product as $row) {
-                    $id = $row['Product_id'];
-                    $name = $row['Product_Name'];
-                    $current_stock = $row['currentStock'];
-                    $cost = number_format($row['Cost'], 2, '.', '');
-                    $sellingPrice =  number_format($row['Selling_price'], 2, '.', '');
-                    $commision =number_format($row['Commision'], 2, '.', '');
-                    $deleteButton = '<a class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#myModalAdd'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>'.
-                        '<a class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#myModalremove'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
+                foreach ($missing as $row) {
+                    $id = $row['Missing_id'];
+                    $date = date('Y-m-d',strtotime($row['Time_Stamp']));
+                    $productID = $row['Product_id'];
+                    $name = $productinfo[$productID]['Product_Name'];
+                    $amount = $row['NoOfItem'];
+                    $totaldeduction = number_format($row['totalMissingcost'], 2, '.', '');
+
+                    $deleteButton =
+                        '<a class="btn btn-danger btn-sm"  onclick="deletMissings('.$id.','.$productID.','.$amount.')" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
                         '<a class="btn btn-success btn-sm"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>'
-                        .'<!--  Add Modal -->
-                                <div class="modal fade" id="myModalAdd'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Add '.$name.' To Stock</h4>
-                                      </div>
-                                      <div class="modal-body">
 
-                                      <form id = "Addform'.$id.'">
-
-                                          <div class="form-group">
-                                            <label for="Name">Amount</label>
-                                            <input type="text" class="form-control" name="addamount'.$id.'" id="addamount'.$id.'" placeholder="Amount">
-                                          </div>
-                                      </form>
-
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" onclick = "addItemToStock('.$id.')" class="btn btn-primary" data-dismiss="modal">Add New Stock</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>'
-                        .'<!--  remove Modal -->
-                                <div class="modal fade" id="myModalremove'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Remove '.$name.' from Stock</h4>
-                                      </div>
-                                      <div class="modal-body">
-
-                                      <form id = "Removeform'.$id.'">
-
-                                          <div class="form-group">
-                                            <label for="Name">Amount</label>
-                                            <input type="text" class="form-control" name="removeamount'.$id.'" id="removeamount'.$id.'" placeholder="Amount">
-                                          </div>
-                                      </form>
-
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" onclick = "removeItemFromStock('.$id.')" class="btn btn-primary" data-dismiss="modal">Remove from current Stock</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>'
                         .'<!--  remove Modal edit -->
                                 <div class="modal fade" id="myModaledit'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Edit '.$name.'</h4>
+                                        <h4 class="modal-title" id="myModalLabel'.$id.'"> Edit Missing</h4>
                                       </div>
                                       <div class="modal-body">
 
                                       <form id = "updateform'.$id.'">
 
                                           <div class="form-group">
-                                            <label for="Name">Product Name</label>
-                                            <input type="text" class="form-control" name="ProductName'.$id.'" id="ProductName'.$id.'" value = "'.$name.'" placeholder="Product Name">
+                                            <label for="Name">Amount</label>
+                                            <input type="text" class="form-control" name="Amount'.$id.'" id="Amount'.$id.'" value = "'.$amount.'" placeholder="Amount">
                                           </div>
 
-                                          <div class="form-group">
-                                            <label for="Name">Cost</label>
-                                            <input type="text" class="form-control" name="Cost'.$id.'" id="Cost'.$id.'" value = "'.$cost.'"  placeholder="Cost">
-                                          </div>
-
-                                          <div class="form-group">
-                                            <label for="Name">Selling Price</label>
-                                            <input type="text" class="form-control" name="SellingPrice'.$id.'" id="SellingPrice'.$id.'" value = "'.$sellingPrice.'" placeholder="Selling Price">
-                                          </div>
-
-
-                                          <div class="form-group">
-                                            <label for="Name">Commision</label>
-                                            <input type="text" class="form-control" name="Commision'.$id.'" id="Commision'.$id.'" value = "'.$commision.'" placeholder="Commision">
-                                          </div>
 
 
 
@@ -447,18 +251,14 @@ echo $_POST['CurrentDate'];?>
 
 
 
-
-
-
                     ;
 
                     echo '<tr>';
                     echo '<td>' . $temp . '</td>';
+                    echo '<td>' . $date . '</td>';
                     echo '<td>' . $name . '</td>';
-                    echo '<td>' . $current_stock . '</td>';
-                    echo '<td>' . $cost . '</td>';
-                    echo '<td>' . $sellingPrice . '</td>';
-                    echo '<td>' . $commision . '</td>';
+                    echo '<td>' . $amount . '</td>';
+                    echo '<td>' . $totaldeduction . '</td>';
                     echo '<td>' . $deleteButton . '</td>';
                     $temp += 1;
                     echo '</tr>';

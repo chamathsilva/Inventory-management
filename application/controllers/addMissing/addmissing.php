@@ -16,11 +16,11 @@ $product_id  = filter_var($_POST["productname"], FILTER_SANITIZE_STRING);
 $date        = filter_var($_POST["CurrentDate"], FILTER_SANITIZE_STRING);
 $amount      = abs(filter_var($_POST["Amount"], FILTER_SANITIZE_STRING));
 
-$totalMisingzcost = $amount * floatval($productInfo[$product_id]['Cost']);
+$totalMisingzcost = $amount * floatval($productInfo[$product_id]['Selling_price']);
 
 $db->beginTransaction();
 
-$result = $db->query("INSERT INTO Missing (Ref_id,Product_id,Time_Stamp,totalMissingcost) VALUES(:Ref_id,:Product_id,:Time_Stamp,:totalMissingcost)",array("Ref_id"=>$Ref_id,"Product_id"=>$product_id,"Time_Stamp"=>$date,"totalMissingcost"=>$totalMisingzcost));
+$result = $db->query("INSERT INTO Missing (Ref_id,Product_id,Time_Stamp,totalMissingcost,NoOfItem) VALUES(:Ref_id,:Product_id,:Time_Stamp,:totalMissingcost,:NoOfItem)",array("Ref_id"=>$Ref_id,"Product_id"=>$product_id,"Time_Stamp"=>$date,"totalMissingcost"=>$totalMisingzcost ,"NoOfItem"=>$amount));
 $result = $db->query("UPDATE  Product SET currentStock = currentStock - :OutStock WHERE Product_id = :product_id" ,array("OutStock" => $amount, "product_id" =>$product_id));
 
 
