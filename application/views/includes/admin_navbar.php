@@ -95,6 +95,11 @@
                 <a onclick="loadaddref()"><i class="fa fa-fw fa-edit"></i>Add ref</a>
             </li>
 
+            <li>
+                <a onclick="loadmanageref()"><i class="fa fa-fw fa-edit"></i>manage ref info</a>
+            </li>
+
+
 
             <!--
             <li>

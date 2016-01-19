@@ -238,6 +238,14 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
     }
 
+    function loadmanageref(){
+        adminLoaddiv.empty();
+        adminLoaddiv.prepend('<img style="margin-left:50%;" src="../../../assets/images/ajax-loader.gif" /> Loading...</div>');
+        adminLoaddiv.load("manageref.php");
+
+    }
+
+
 </script>
 
 
