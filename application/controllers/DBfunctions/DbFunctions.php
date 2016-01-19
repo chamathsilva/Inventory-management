@@ -162,6 +162,29 @@
     }
 
 
+    // for performance sheet
+    function getMonthlySaleSummary($id,$datestart){
+        global $db;
+        $Salessummary = $db->query(" SELECT SUM(selles),SUM(returns),SUM(commission),product_id FROM Transaction WHERE ref_id = :rid and DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth GROUP BY product_id",array("yermonth"=>$datestart,"rid" =>$id ));
+        return $Salessummary;
+    }
+
+    function getTotaladvance($id,$datestart){
+        global $db;
+        $advancesummary = $db->query(" SELECT SUM(Amount) FROM Advances WHERE ref_id = :rid and DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth ",array("yermonth"=>$datestart, "rid" =>$id ));
+        return $advancesummary[0]['SUM(Amount)'];
+
+    }
+
+;
+
+     function getMissingSummary($id,$datestart){
+         global $db;
+         $missingesummary = $db->query("SELECT Product_id,SUM(NoOfItem),SUM(totalMissingcost) FROM Missing WHERE Ref_id =:rid and DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth    GROUP BY Product_id ",array("yermonth"=>$datestart,"rid" =>$id ));
+         return $missingesummary;
+
+     }
+
 
 
 
@@ -193,3 +216,10 @@
     //d(getProductId(),"getProductId");
    // d(getProductInfo(),"getProductInfo");
     //d(getrefName(4),"getrefName");
+
+
+    //d(getMonthlySaleSummary(6,'2016-01'),"getMonthlySaleSummary");
+
+    //d(getTotaladvance(6,'2016-01'),"getTotaladvance");
+
+ // d(getMissingSummary(6,'2016-01'),"getMissingSummary");

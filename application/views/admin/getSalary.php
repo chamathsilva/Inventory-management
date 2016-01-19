@@ -25,7 +25,7 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="CurrentDatestart">Start Date</label>
+                            <label for="CurrentDatestart">Select Month</label>
                             <div id="datetimepicker1" class="input-append date">
                                 <span class=" add-on glyphicon glyphicon-time " aria-hidden="true"></span>
                                 <input data-format="yyyy-MM" id="CurrentDatestart" name="CurrentDatestart" type="text"> </input>
@@ -65,6 +65,13 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Bonus</label>
                                 <input type="text" class="form-control" id="Amount"  name="Amount" placeholder="Amount">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Telephone Chargers</label>
+                                <input type="text" class="form-control" id="TChargers"  name="TChargers" placeholder="Telephone Chargers">
                             </div>
                         </div>
 
@@ -110,6 +117,13 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                 number :true
 
             },
+
+            TChargers: {
+                required: true,
+                number :true
+
+            },
+
 
             CurrentDatestart: {
                 required: true
@@ -159,13 +173,19 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
             //alert("form is invalid");
             return false;
         }
+
+
         //alert("form is valid");
         var datee = document.getElementById("CurrentDatestart").value;
         var namee = document.getElementById("refname").value;
         var amount = document.getElementById("Amount").value;
+        var TChargers = document.getElementById("TChargers").value;
 
-        window.open('../../controllers/calculateSalary/paysheet.php?refname='+ namee +'&CurrentDatestart='+datee +'&Amount='+ amount,'_blank');
+        window.open('../../controllers/calculateSalary/paysheet.php?refname='+ namee +'&CurrentDatestart='+datee +'&Amount='+ amount+'&Tchargers='+ TChargers,'_blank');
+        window.open('../../controllers/calculateSalary/performancesheet.php?refname='+ namee +'&CurrentDatestart='+datee +'&Amount='+ amount+'&Tchargers='+ TChargers,'_blank');
+
     }
+
 
 
     //progress bar function

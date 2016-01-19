@@ -5,14 +5,14 @@ require_once('../../../assets/pdf/fpdf.php');
 //Sanitize input data using PHP filter_var().
 
 $Ref_id      = filter_var($_GET["refname"], FILTER_SANITIZE_STRING);
-$datestart        = filter_var($_GET["CurrentDatestart"], FILTER_SANITIZE_STRING);
+$datestart        = filter_var($_GET["CurrentDatestart"]);
 $Bonus      = abs(filter_var($_GET["Amount"], FILTER_SANITIZE_STRING));
-
+$telephoneCost = abs(filter_var($_GET["Tchargers"], FILTER_SANITIZE_STRING));
 
 
 //echo $Ref_id.$datestart.$Bonus;
 
-$db->beginTransaction();
+//$db->beginTransaction();
 
 $salary = $db->query("SELECT * FROM Transaction WHERE DATE_FORMAT(Time_Stamp,'%Y-%m') = :yermonth and ref_id = :ref_id",array("yermonth"=>$datestart,"ref_id"=>$Ref_id));
 
@@ -45,15 +45,22 @@ foreach ($advance as $arow){
     $totalAdvaces += $arow['Amount'];
 
 }
-
-$totalAdditions = $totalCommision + $Bonus;
-$totalDeductions = $totalMissings + $totalAdvaces;
-$totalSalary = $totalAdditions - $totalDeductions;
-
 //echo "<br>Total salary : $totalSalary.$totalDeductions.$totalAdditions";
 
+$SalesCommision = $totalCommision - $totalMissings;
 
-$db->commit();
+
+// 500 for telephone allowance
+$totalAdditions = $SalesCommision + $Bonus + 500;
+
+$totalDeductions =  $totalAdvaces + $telephoneCost;
+
+$totalSalary = $totalAdditions - $totalDeductions;
+
+
+
+
+//$db->commit();
 
 
 
@@ -76,6 +83,10 @@ class PDF extends FPDF
         // Title
         $this->SetFont('Arial','B',12);
         $this->Cell(40,10,'THE WAY TO THE SUCCESS',0,1,'C');
+
+        $this->Cell(73);
+        $this->SetFont('Arial','',8);
+        $this->Cell(40,1,' No.65,parm grow av,3rd lane,Rathmalana.',0,1,'C');
         // Line break
         $this->Ln(5);
     }
@@ -230,12 +241,33 @@ $pdf->AddPage();
 
 $pdf->ChapterTitle("Salary Slip");
 
+$pdf->Ln(5);
 $pdf->Cell(15);
 $pdf->SetFont('Times','',11);
-$pdf->Cell(40,5,"Employee Name  : $name",0,1);
+$pdf->Cell(40,0,"Employee Name",0,1);
+$pdf->Cell(50);
+$pdf->Cell(40,0,":  Mr.$name",0,1);
+
+$pdf->Ln(5);
 $pdf->Cell(15);
-$pdf->Cell(40,5,"Year & Month     : $datestart",0,1);
+$pdf->Cell(40,0,"Designation ",0,1);
+$pdf->Cell(50);
+$pdf->Cell(40,0,":  Sales Representative",0,1);
+
+$pdf->Ln(5);
+$pdf->Cell(15);
+$pdf->Cell(40,0,"Year & Month",0,1);
+$pdf->Cell(50);
+$temp = mktime(0,0,0,10,3,1975);
+//$datestart  = date("F-Y",$temp);
+
+$new = strtotime($datestart);
+$datestart  = date("F-Y",$new);
+
+$pdf->Cell(40,0,":  $datestart",0,1);
+
 $pdf->Ln(15);
+
 
 ////////
 
@@ -252,8 +284,11 @@ $header = array('Earnings', 'Rs', 'Deductions', 'Rs');
 // Data loading
 
 $data2 = array();
-$data2[] = array("Commissions",$totalCommision,"Advances",$totalAdvaces);
-$data2[] = array("Bonus",$Bonus,"Missing",$totalMissings);
+
+$data2[] = array("Sales Commissions",$SalesCommision,"Salary Advances",$totalAdvaces);
+//$data2[] = array("Bonus",$Bonus,"Missing",$totalMissings);
+$data2[] = array("Telephon allowanc",500,"Telephone Cost",$telephoneCost);
+$data2[] = array("Other Earnings",0,"No pay deduction ",0);
 
 
 

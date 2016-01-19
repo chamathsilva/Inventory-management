@@ -54,13 +54,14 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
                 </div>
             </div>
 
-
+                <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Advance</label>
                     <input type="text" class="form-control" id="Amount"  name="Amount" placeholder="Advance">
                 </div>
               </div>
+                    </div>
 
 
 

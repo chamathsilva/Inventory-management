@@ -80,11 +80,14 @@
                 <a onclick="loadmaddmissing()"><i class="fa fa-fw fa-edit"></i>Add missings</a>
             </li>
 
+            <!--
             <li>
                 <a onclick="loadremovemissings()"><i class="fa fa-fw fa-edit"></i>Remove missings</a>
+            </li> -->
+
+            <li>
+                <a onclick="loadmanageref()"><i class="fa fa-fw fa-edit"></i>Manage ref info</a>
             </li>
-
-
 
             <li>
                 <a onclick="loadgetSalary()"><i class="fa fa-fw fa-edit"></i>Get Salary</a>
@@ -95,9 +98,7 @@
                 <a onclick="loadaddref()"><i class="fa fa-fw fa-edit"></i>Add ref</a>
             </li>
 
-            <li>
-                <a onclick="loadmanageref()"><i class="fa fa-fw fa-edit"></i>manage ref info</a>
-            </li>
+
 
 
 
