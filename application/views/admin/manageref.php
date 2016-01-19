@@ -90,10 +90,10 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 
     function beforeSubmit(){
         if (!$('#getinfo').valid()) {
-            alert("form is invalid");
+            //alert("form is invalid");
             return false;
         }
-        alert("form is valid");
+        //alert("form is valid");
         return true;
 
     }
@@ -140,103 +140,116 @@ require_once("../../controllers/DBfunctions/DbFunctions.php");
 <script type="text/javascript">
 
     function deletMissings(missinid,productid,amount){
-        alert("How are you missins" + missinid + productid + amount );
+        var con1 = confirm("Are you sure !");
+
+        if (con1 == true) {
 
 
-        var m_data = new FormData();
-        m_data.append( 'missinid',  missinid);
-        m_data.append( 'productid',  productid);
-        m_data.append( 'amount',  amount);
+            var m_data = new FormData();
+            m_data.append('missinid', missinid);
+            m_data.append('productid', productid);
+            m_data.append('amount', amount);
 
-        //Ajax post data to server
-        $.ajax({
-            url: '../../controllers/addMissing/deleteMissings.php',
-            data: m_data,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            dataType:'json',
-            success: function(response){
-                //load json data from server and output message
-                if (response.type == "text"){
-                    $("#results").html(response.text);
-                    // reload the data table
-                    $("#getrefinfo").click();
+            //Ajax post data to server
+            $.ajax({
+                url: '../../controllers/addMissing/deleteMissings.php',
+                data: m_data,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+                    //load json data from server and output message
+                    if (response.type == "text") {
+                        $("#results").html(response.text);
+                        // reload the data table
+                        $("#getrefinfo").click();
 
 
-                }else{
-                    $("#results").html(response.text);
+                    } else {
+                        $("#results").html(response.text);
 
+                    }
                 }
-            }
-        });
-
+            });
+        }
 
     }
 
     function deleteAdvace(advanceid){
-        alert("How are you advance" +  advanceid);
 
-        var m_data = new FormData();
-        m_data.append( 'advanceid',  advanceid);
+        var con2 = confirm("Are you sure !");
 
-        //Ajax post data to server
-        $.ajax({
-            url: '../../controllers/Advance/deleteAdvace.php',
-            data: m_data,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            dataType:'json',
-            success: function(response){
-                //load json data from server and output message
-                if (response.type == "text"){
-                    $("#results").html(response.text);
-                    // reload the data table
-                    $("#getrefinfo").click();
+        if (con2 == true) {
+
+            var m_data = new FormData();
+            m_data.append('advanceid', advanceid);
+
+            //Ajax post data to server
+            $.ajax({
+                url: '../../controllers/Advance/deleteAdvace.php',
+                data: m_data,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+                    //load json data from server and output message
+                    if (response.type == "text") {
+                        $("#results").html(response.text);
+                        // reload the data table
+                        $("#getrefinfo").click();
 
 
-                }else{
-                    $("#results").html(response.text);
+                    } else {
+                        $("#results").html(response.text);
 
+                    }
                 }
-            }
-        });
+            });
+
+        }
 
     }
 
     function deleteSales(trasactionid,productid,sales,returns){
-        alert("How are you sales" +  returns +  trasactionid + productid + sales);
+        var con3 = confirm("Are you sure !");
+
+        if (con3 == true){
+
+            var m_data = new FormData();
+            m_data.append( 'trasactionid',  trasactionid);
+            m_data.append( 'productid',  productid);
+            m_data.append( 'sales',  sales);
+            m_data.append( 'returns',  returns);
+
+            //Ajax post data to server
+            $.ajax({
+                url: '../../controllers/salesManagement/deletedailentry.php',
+                data: m_data,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                dataType:'json',
+                success: function(response){
+                    //load json data from server and output message
+                    if (response.type == "text"){
+                        $("#results").html(response.text);
+                        // reload the data table
+                        $("#getrefinfo").click();
 
 
-        var m_data = new FormData();
-        m_data.append( 'trasactionid',  trasactionid);
-        m_data.append( 'productid',  productid);
-        m_data.append( 'sales',  sales);
-        m_data.append( 'returns',  returns);
+                    }else{
+                        $("#results").html(response.text);
 
-        //Ajax post data to server
-        $.ajax({
-            url: '../../controllers/salesManagement/deletedailentry.php',
-            data: m_data,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            dataType:'json',
-            success: function(response){
-                //load json data from server and output message
-                if (response.type == "text"){
-                    $("#results").html(response.text);
-                    // reload the data table
-                    $("#getrefinfo").click();
-
-
-                }else{
-                    $("#results").html(response.text);
-
+                    }
                 }
-            }
-        });
+            });
+
+
+
+        }
+
 
 
     }

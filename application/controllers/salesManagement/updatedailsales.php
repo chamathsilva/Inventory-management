@@ -63,7 +63,7 @@ $advance = $db->query("SELECT * FROM Advances WHERE DATE_FORMAT(Time_stamp,'%Y-%
 
         $deleteButton =
             '<a class="btn btn-danger btn-sm"  onclick="deleteSales('.$id.','.$productIDD.','.$sales.','.$return.')" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
-            '<a class="btn btn-success btn-sm"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>'
+            '<!--a class="btn btn-success btn-sm disabled"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a-->'
 
             .'<!--  remove Modal edit -->
                                 <div class="modal fade" id="myModaledit'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
@@ -141,7 +141,7 @@ $advance = $db->query("SELECT * FROM Advances WHERE DATE_FORMAT(Time_stamp,'%Y-%
 
                     $deleteButton =
                         '<a class="btn btn-danger btn-sm"  onclick="deleteAdvace('.$id.')" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
-                        '<a class="btn btn-success btn-sm"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>'
+                        '<!--a class="btn btn-success btn-sm disabled"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a-->'
 
 
                         .'<!--  remove Modal edit -->
@@ -216,7 +216,7 @@ $advance = $db->query("SELECT * FROM Advances WHERE DATE_FORMAT(Time_stamp,'%Y-%
 
                     $deleteButton =
                         '<a class="btn btn-danger btn-sm"  onclick="deletMissings('.$id.','.$productID.','.$amount.')" style = "margin-right:10px;"> <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>'.
-                        '<a class="btn btn-success btn-sm"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>'
+                        '<!-- a class="btn btn-success btn-sm disabled"  data-toggle="modal" data-target="#myModaledit'.$id.'" style = "margin-right:10px;"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a -->'
 
                         .'<!--  remove Modal edit -->
                                 <div class="modal fade" id="myModaledit'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel'.$id.'">
@@ -243,7 +243,7 @@ $advance = $db->query("SELECT * FROM Advances WHERE DATE_FORMAT(Time_stamp,'%Y-%
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" onclick = "updateProduct('.$id.')" class="btn btn-primary" data-dismiss="modal">Update</button>
+                                        <button type="button" onclick = "updateMissings('.$id.','.$amount.')" class="btn btn-primary" data-dismiss="modal">Update</button>
                                       </div>
                                     </div>
                                   </div>
