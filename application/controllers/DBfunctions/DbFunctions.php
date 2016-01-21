@@ -185,6 +185,29 @@
 
      }
 
+    function mytest($countt){
+        global $db;
+        $temp = 0;
+        $id = 0;
+
+        while ($temp < $countt){
+            $temp += 1;
+            $id = $temp % 1000;
+            $advancesummary = $db->query("INSERT INTO Stock (product_id) VALUES (:Pid) ",array("Pid" =>$id ));
+
+        }
+
+        if ($temp% 100 == 0){
+            echo "$temp";
+        }
+
+        return $advancesummary;;
+
+
+
+
+    }
+
 
 
 
@@ -222,4 +245,4 @@
 
     //d(getTotaladvance(6,'2016-01'),"getTotaladvance");
 
- // d(getMissingSummary(6,'2016-01'),"getMissingSummary");
+   //d(mytest(100000),"mytest");
